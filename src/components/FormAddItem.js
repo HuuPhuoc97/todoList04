@@ -43,14 +43,11 @@ class FormAddItem extends Component {
     var name = target.name;
     var value = target.value;
     if (name === "level") {
-      if (value === "-1") value = -1;
-      else if (value === "1") value = 1;
-      else value = 0;
+      value = parseInt(target.value, 10);
     }
     this.setState({
       [name]: value
     });
-    console.log(this.state);
   };
 
   onSubmit = event => {

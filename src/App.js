@@ -111,7 +111,7 @@ class App extends Component {
   //search by name
   onSearch = keyWord => {
     this.setState({
-      keyWord: keyWord.toLowerCase()
+      keyWord
     });
   };
   //sort by name
@@ -126,7 +126,7 @@ class App extends Component {
     var { items, displayForm, keyWord, order } = this.state;
     if (keyWord) {
       items = items.filter(item => {
-        return item.name.toLowerCase().indexOf(keyWord) !== -1;
+        return item.name.toLowerCase().indexOf(keyWord.toLowerCase()) !== -1;
       });
     }
 
