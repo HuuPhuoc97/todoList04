@@ -1,8 +1,9 @@
 {
-  "name": "qlviec",
+  "name": "todolist04",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "lodash": "^4.17.15",
     "randomstring": "^1.1.5",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
