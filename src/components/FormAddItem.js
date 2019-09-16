@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 
 class FormAddItem extends Component {
   constructor(props) {
@@ -30,31 +32,13 @@ class FormAddItem extends Component {
         level: itemUpdating.level
       });
     } else {
-      this.setState({
-        id: "",
-        name: "",
-        level: 0
-      });
+      this.onResetForm();
     }
   }
 
-  onChangeDate = event => {
-    var target = event.target;
-    var name = target.name;
-    var value = target.value;
-    if (name === "level") {
-      value = parseInt(target.value, 10);
-    }
-    this.setState({
-      [name]: value
-    });
-  };
-
-  onSubmit = event => {
-    event.preventDefault();
-    this.props.onSubmit(this.state);
-
-    this.onResetForm();
+  onSubmit = fields => {
+    this.props.onSubmit(fields);
+ 
   };
 
   // Reset form to default
@@ -62,7 +46,7 @@ class FormAddItem extends Component {
     this.setState({
       id: "",
       name: "",
-      level: -1
+      level: 0
     });
   };
 
@@ -86,45 +70,63 @@ class FormAddItem extends Component {
               </h3>
             </div>
             <div className="panel-body">
-              <form onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <label>Name: </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.onChangeDate}
-                    required="required"
-                  />
-                </div>
+              <Formik
+                enableReinitialize
+                initialValues={this.state}
+                validationSchema={Yup.object().shape({
+                  name: Yup.string()
+                    .required(" Name is required") 
+                    .min(4, "Name must be at least 4 characters")
+                })}
+                onSubmit={this.onSubmit}
+                render={({  errors, touched  }) => (
+                  <Form>
+                    {touched.name && errors.name ? (
+                      <div className="alert alert-danger">
+                        <strong>Error!</strong> {errors.name}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    <div className="form-group">
+                    
+                      <label>Name: </label>
+                      <Field
+                        type="text"
+                        className="form-control"
+                        name="name"
+                      />
+                    </div>
 
-                <label>Level: </label>
-                <select
-                  className="form-control"
-                  name="level"
-                  value={this.state.level}
-                  onChange={this.onChangeDate}
-                >
-                  <option value={-1}>Small</option>
-                  <option value={0}>Medium</option>
-                  <option value={1}>Hight</option>
-                </select>
-                <br />
+                    <label>Level: </label>
+                    <Field
+                      component="select"
+                      className="form-control"
+                      name="level"
+                    >
+                      <option value={-1}>Small</option>
+                      <option value={0}>Medium</option>
+                      <option value={1}>Hight</option>
+                    </Field>
+                    <br />
 
-                <div className="text-center">
-                  <button type="submit" className="btn btn-success mr-5">
-                    Submit
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-warning"
-                    onClick={this.onResetForm}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
+                    <div className="text-center">
+                      <button type="submit" className="btn btn-success mr-5">
+                        Submit
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-warning"
+                        onClick={this.onResetForm}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </Form>
+                )}
+              />
+
+              {/* end div panel-body */}
             </div>
           </div>
         </div>

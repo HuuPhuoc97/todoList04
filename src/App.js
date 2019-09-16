@@ -17,7 +17,8 @@ class App extends Component {
       order: 0
     };
   }
-  componentWillMount() {
+
+  componentDidMount() {
     if (localStorage && localStorage.getItem("items")) {
       var items = JSON.parse(localStorage.getItem("items"));
       this.setState({
@@ -61,7 +62,7 @@ class App extends Component {
   //submit on form add item
   onSubmit = newItem => {
     var items = this.state.items;
-
+    newItem.level = parseInt(newItem.level, 10);
     // add item
     if (newItem.id === "") {
       newItem.id = this.generateID();
@@ -123,6 +124,7 @@ class App extends Component {
   };
 
   render() {
+
     var { items, displayForm, keyWord, order } = this.state;
     if (keyWord) {
       items = items.filter(item => {
