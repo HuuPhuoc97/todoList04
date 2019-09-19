@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import {connect} from "react-redux";
+import * as actions from "./../actions/index";
 
 class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      keyWord: ""
+      keyword: ""
     };
   }
 
@@ -16,7 +18,7 @@ class Search extends Component {
   };
 
   onSearch = () => {
-    this.props.onSearch(this.state.keyWord);
+    this.props.onSearch(this.state.keyword);
   };
 
   render() {
@@ -27,7 +29,7 @@ class Search extends Component {
           className="form-control"
           placeholder="Search"
           onChange={this.onChangeSearch}
-          name="keyWord"
+          name="keyword"
         />
         <span className="input-group-btn">
           <button
@@ -43,4 +45,12 @@ class Search extends Component {
   }
 }
 
-export default Search;
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onSearch : (keyword) => {
+      dispatch(actions.search(keyword))
+    }
+  }
+}
+export default connect(null, mapDispatchToProps)(Search)

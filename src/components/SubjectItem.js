@@ -1,13 +1,14 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as actions from "./../actions/index";
 
-class Item extends Component {
+class SubjectItem extends Component {
   // properties lable of <span>
   takeLable = () => {
     var { item } = this.props;
     if (item.level === -1) {
       return "label label-default";
-    }
-    if (item.level === 0) {
+    } else if (item.level === 0) {
       return "label label-info";
     } else {
       return "label label-success";
@@ -17,12 +18,16 @@ class Item extends Component {
     var { item } = this.props;
     if (item.level === -1) {
       return "Small";
-    }
-    if (item.level === 0) {
+    } else if (item.level === 0) {
       return "Medium";
     } else {
       return "Hight";
     }
+  };
+
+  selectedItem = () => {
+    this.props.onGetUpdating(this.props.item);
+    this.props.onOpenForm();
   };
 
   render() {
@@ -40,9 +45,7 @@ class Item extends Component {
           <button
             type="button"
             className="btn btn-warning"
-            onClick={() => {
-              this.props.onUpdateItem(item.id);
-            }}
+            onClick={this.selectedItem}
           >
             Edit
           </button>
@@ -51,7 +54,7 @@ class Item extends Component {
             type="button"
             className="btn btn-danger"
             onClick={() => {
-              this.props.onDeleteItem(item.id);
+              this.props.onDeleteItem(item);
             }}
           >
             Delete
@@ -62,4 +65,23 @@ class Item extends Component {
   }
 }
 
-export default Item;
+const mapStateToProps = state => {
+  return {};
+};
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onDeleteItem: item => {
+      dispatch(actions.deleteItem(item));
+    },
+    onGetUpdating: item => {
+      dispatch(actions.getUpdating(item));
+    },
+    onOpenForm: () => {
+      dispatch(actions.openForm());
+    }
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SubjectItem);

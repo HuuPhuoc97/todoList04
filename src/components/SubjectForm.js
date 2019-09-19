@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import {connect} from "react-redux";
+import * as actions from "./../actions/index";
 
-class FormAddItem extends Component {
+class SubjectForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,7 +39,12 @@ class FormAddItem extends Component {
   }
 
   onSubmit = fields => {
-    this.props.onSubmit(fields);
+    fields.level = parseInt(fields.level);
+    if(fields.id === '')
+      this.props.onAddItem(fields);
+    else 
+      this.props.onUpdateItem(fields);
+      
  
   };
 
@@ -52,6 +59,7 @@ class FormAddItem extends Component {
 
   render() {
     var { id } = this.state;
+    if(!this.props.isDisplayForm) return '';
     return (
       <div>
         <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
@@ -117,7 +125,7 @@ class FormAddItem extends Component {
                       <button
                         type="button"
                         className="btn btn-warning"
-                        onClick={this.onResetForm}
+                        onClick={this.props.onCloseForm}
                       >
                         Cancel
                       </button>
@@ -135,4 +143,23 @@ class FormAddItem extends Component {
   }
 }
 
-export default FormAddItem;
+const mapStateToProps = (state) => {
+  return {
+    isDisplayForm: state.isDisplayForm,
+    itemUpdating: state.itemUpdating
+  }
+}
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onAddItem: (item) => {
+      dispatch(actions.addItem(item));
+    },
+    onCloseForm: () => {
+      dispatch(actions.closeForm());
+    },
+    onUpdateItem: (item) => {
+      dispatch(actions.updateItem(item));
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SubjectForm);
