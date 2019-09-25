@@ -11,17 +11,27 @@ var saveLocal = (array) => {
   localStorage.setItem("items", JSON.stringify(array));
 }
 
-var data = JSON.parse(localStorage.getItem("items"));
-var initialState = data ? data : [];
+var initialState = [];
 
 var items = (state = initialState, action) => {
   switch (action.type) {
-    case types.LIST_ITEM: {
+    case types.LIST_ITEM_REQUEST: {
+      return [...state];
+    }
+    case types.LIST_ITEM_SUCCESS: {
+      // state = action.items
+      return action.items;
+    }
+    case types.LIST_ITEM_ERROR: {
       return state;
     }
 
     // add item 
-    case types.ADD_ITEM: {
+    case types.ADD_ITEM_REQUEST: {
+
+      return [...state];
+    }
+    case types.ADD_ITEM_SUCCESS: { 
       let newItem = {
         id: generateID(),
         name: action.item.name,
@@ -29,6 +39,9 @@ var items = (state = initialState, action) => {
       };
       state.push(newItem);
       saveLocal(state);
+      return  [...state];
+    }
+    case types.ADD_ITEM_ERROR: {
       return [...state];
     }
 

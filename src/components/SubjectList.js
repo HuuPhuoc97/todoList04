@@ -1,12 +1,22 @@
 import React, { Component } from "react";
 import SubjectItem from "./SubjectItem";
 import { connect } from "react-redux";
-import {orderBy} from "lodash";
+import _ from "lodash";
+import * as actions from './../actions/index';
 
 class SubjectList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+  
+
+  componentDidMount(){
+    this.props.getListItemRequest();
+  }
   render() {
     var { items, keyword, sortBy } = this.props;
-
+    
     // search by name
     if (keyword !== "") {
       items = items.filter(item => {
@@ -14,12 +24,11 @@ class SubjectList extends Component {
       });
     }
 
-        //-- use lodash to sort--
-    if(sortBy === -1){
-      items = orderBy(items, ['name'], ['asc']);
-    }
-    else if(sortBy === 1){
-      items = orderBy(items, ['name'], ['desc']);
+    //-- use lodash to sort--
+    if (sortBy === -1) {
+      items = _.orderBy(items, ["name"], ["asc"]);
+    } else if (sortBy === 1) {
+      items = _.orderBy(items, ["name"], ["desc"]);
     }
 
     var elementItem = items.map((item, index) => {
@@ -57,7 +66,11 @@ const mapStateToProps = state => {
   };
 };
 const mapDispatchToProps = (dispatch, props) => {
-  return {};
+  return {
+    getListItemRequest: () => {
+      dispatch(actions.getListItemRequest());
+    }
+  };
 };
 
 export default connect(

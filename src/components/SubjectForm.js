@@ -40,15 +40,15 @@ class SubjectForm extends Component {
 
   onSubmit = fields => {
     fields.level = parseInt(fields.level);
-    if(fields.id === '')
-      this.props.onAddItem(fields);
-    else 
+    if(fields.id === ''){
+      this.props.addItemRequest(fields); }
+    else{ 
       this.props.onUpdateItem(fields);
-      
- 
+    }
+    this.props.onCloseForm();
   };
 
-  // Reset form to default
+  // Reset state to default
   onResetForm = () => {
     this.setState({
       id: "",
@@ -151,8 +151,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    onAddItem: (item) => {
-      dispatch(actions.addItem(item));
+    addItemRequest: (item) => {
+      dispatch(actions.addItemRequest(item));
     },
     onCloseForm: () => {
       dispatch(actions.closeForm());
