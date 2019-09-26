@@ -40,6 +40,8 @@ class SubjectForm extends Component {
 
   onSubmit = fields => {
     fields.level = parseInt(fields.level);
+    
+    
     if(fields.id === ''){
       this.props.addItemRequest(fields); }
     else{ 
@@ -59,6 +61,8 @@ class SubjectForm extends Component {
 
   render() {
     var { id } = this.state;
+    console.log(this.props.isDisplayForm);
+    
     if(!this.props.isDisplayForm) return '';
     return (
       <div>
@@ -145,8 +149,8 @@ class SubjectForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isDisplayForm: state.isDisplayForm,
-    itemUpdating: state.itemUpdating
+    isDisplayForm: state.subject.isDisplayForm,
+    itemUpdating: state.subject.itemUpdating
   }
 }
 const mapDispatchToProps = (dispatch, props) => {

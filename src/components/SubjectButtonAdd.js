@@ -30,8 +30,8 @@ class SubjectButtonAdd extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isDisplayForm: state.isDisplayForm,
-    itemUpdating: state.itemUpdating
+    isDisplayForm: state.subject.isDisplayForm,
+    itemUpdating: state.subject.itemUpdating
   }
 }
 const mapDispatchToProps = (dispatch, props) => {

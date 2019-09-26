@@ -13,7 +13,10 @@ export const TOGGLE_FORM = 'TOGGLE_FORM';
 export const CLOSE_FORM = 'CLOSE_FORM';
 export const OPEN_FORM = 'OPEN_FORM';
 
+// delete item
 export const DELETE_ITEM = 'DELETE_ITEM';
+
+ // Get value for updated item
 export const GET_UPDATING = 'GET_UPDATING';
 export const UPDATE_ITEM = 'UPDATE_ITEM';
 export const SEARCH = 'SEARCH';

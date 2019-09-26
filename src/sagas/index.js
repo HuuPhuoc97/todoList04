@@ -13,7 +13,7 @@ import * as types from "./../constants/ActionTypes";
 //   import _ from "lodash";
 
 // func get list
-const data = JSON.parse(localStorage.getItem("items"));
+const data = JSON.parse(localStorage.getItem("items"))?JSON.parse(localStorage.getItem("items")):[];
 function* getTodoList() {
   try {
     const items = data ? data : [];
@@ -36,6 +36,8 @@ function* addItem(action) {
       type: types.ADD_ITEM_SUCCESS,
       item: action.item
     });
+    
+    
   } catch (error) {
     yield put({
       type: types.ADD_ITEM_ERROR,

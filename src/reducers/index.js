@@ -1,15 +1,7 @@
 import {combineReducers} from 'redux';
-import items from './items';
-import isDisplayForm from './isDisplayForm';
-import itemUpdating from './itemUpdating';
-import search from './search';
-import sort from './sort';
+import subject from './subject';
 
 const myReducer = combineReducers({
-    items,
-    isDisplayForm,
-    itemUpdating,
-    search,
-    sort
+    subject,
 });
 export default myReducer;

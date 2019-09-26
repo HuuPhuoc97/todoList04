@@ -5,18 +5,13 @@ import _ from "lodash";
 import * as actions from './../actions/index';
 
 class SubjectList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
-  
 
   componentDidMount(){
     this.props.getListItemRequest();
   }
   render() {
     var { items, keyword, sortBy } = this.props;
-    
+
     // search by name
     if (keyword !== "") {
       items = items.filter(item => {
@@ -60,9 +55,9 @@ class SubjectList extends Component {
 
 const mapStateToProps = state => {
   return {
-    items: state.items,
-    keyword: state.search,
-    sortBy: state.sort
+    items: state.subject.items,
+    keyword: state.subject.keyword,
+    sortBy: state.subject.sortBy
   };
 };
 const mapDispatchToProps = (dispatch, props) => {
