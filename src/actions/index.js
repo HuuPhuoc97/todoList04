@@ -54,36 +54,100 @@ export const closeForm = () => {
   };
 };
 
-export const deleteItem = item => {
+
+//delete item
+export const deleteItemRequest = item => {
   return {
-    type: types.DELETE_ITEM,
+    type: types.DELETE_ITEM_REQUEST,
     item
   };
 };
-
-export const getUpdating = item => {
+export const deleteItemSuccess = item => {
   return {
-    type: types.GET_UPDATING,
+    type: types.DELETE_ITEM_SUCCESS,
     item
   };
 };
-
-export const updateItem = item => {
+export const deleteItemError = error => {
   return {
-    type: types.UPDATE_ITEM,
-    item
+    type: types.DELETE_ITEM_ERROR,
+    error
   };
 };
 
-export const search = keyword => {
+ // set value for updating variable
+export const setUpdatingObjectRequest = item => {
   return {
-    type: types.SEARCH,
+    type: types.SET_UPDATING_OBJECT_REQUEST,
+    item
+  };
+};
+export const setUpdatingObjectSuccess = item => {
+  return {
+    type: types.SET_UPDATING_OBJECT_SUCCESS,
+    item
+  };
+};
+export const setUpdatingObjectError = () => {
+  return {
+    type: types.SET_UPDATING_OBJECT_ERROR,
+  };
+};
+
+// update item
+export const updateItemRequest = item => {
+  return {
+    type: types.UPDATE_ITEM_REQUEST,
+    item
+  };
+};
+export const updateItemSuccess = item => {
+  return {
+    type: types.UPDATE_ITEM_SUCCESS,
+    item
+  };
+};
+export const updateItemError = () => {
+  return {
+    type: types.UPDATE_ITEM_ERROR,
+  };
+};
+
+// search
+export const searchRequest = keyword => {
+  return {
+    type: types.SEARCH_REQUEST,
     keyword
   };
 };
-export const sort = sortBy => {
+export const searchSuccess = keyword => {
   return {
-    type: types.SORT,
+    type: types.SEARCH_SUCCESS,
+    keyword
+  };
+};
+export const searchError = () => {
+  return {
+    type: types.SEARCH_ERROR,
+
+  };
+};
+
+// sort
+export const sortRequest = sortBy => {
+  return {
+    type: types.SORT_REQUEST,
     sortBy
+  };
+};
+export const sortSuccess = sortBy => {
+  return {
+    type: types.SORT_SUCCESS,
+    sortBy
+  };
+};
+export const sortError = () => {
+  return {
+    type: types.SORT_ERROR,
   };
 };

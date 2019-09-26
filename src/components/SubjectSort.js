@@ -26,7 +26,7 @@ class Sort extends Component {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     onSort : (sortBy) => {
-      dispatch(actions.sort(sortBy))
+      dispatch(actions.sortRequest(sortBy))
     }
   }
 }

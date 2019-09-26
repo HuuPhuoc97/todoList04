@@ -40,7 +40,7 @@ const mapDispatchToProps = (dispatch, props) => {
       dispatch(actions.toggleForm())
     },
     setNullUpdating : (item) => {
-      dispatch(actions.getUpdating(item))
+      dispatch(actions.setUpdatingObjectRequest(item))
     }
   }
 }

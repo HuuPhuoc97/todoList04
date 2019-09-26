@@ -14,10 +14,26 @@ export const CLOSE_FORM = 'CLOSE_FORM';
 export const OPEN_FORM = 'OPEN_FORM';
 
 // delete item
-export const DELETE_ITEM = 'DELETE_ITEM';
+export const DELETE_ITEM_REQUEST = 'DELETE_ITEM_REQUEST';
+export const DELETE_ITEM_SUCCESS = 'DELETE_ITEM_SUCCESS';
+export const DELETE_ITEM_ERROR = 'DELETE_ITEM_ERROR';
 
- // Get value for updated item
-export const GET_UPDATING = 'GET_UPDATING';
-export const UPDATE_ITEM = 'UPDATE_ITEM';
-export const SEARCH = 'SEARCH';
-export const SORT = 'SORT';
+// set value for updating object
+export const SET_UPDATING_OBJECT_REQUEST = 'SET_UPDATING_OBJECT_REQUEST';
+export const SET_UPDATING_OBJECT_SUCCESS = 'SET_UPDATING_OBJECT_SUCCESS';
+export const SET_UPDATING_OBJECT_ERROR = 'SET_UPDATING_OBJECT_ERROR';
+
+// update item
+export const UPDATE_ITEM_REQUEST = 'UPDATE_ITEM_REQUEST';
+export const UPDATE_ITEM_SUCCESS = 'UPDATE_ITEM_SUCCESS';
+export const UPDATE_ITEM_ERROR = 'UPDATE_ITEM_ERROR';
+
+//search 
+export const SEARCH_REQUEST = 'SEARCH_REQUEST';
+export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
+export const SEARCH_ERROR = 'SEARCH_ERROR';
+
+//sort
+export const SORT_REQUEST = 'SORT_REQUEST';
+export const SORT_SUCCESS = 'SORT_SUCCESS';
+export const SORT_ERROR = 'SORT_ERROR';

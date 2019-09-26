@@ -61,7 +61,6 @@ class SubjectForm extends Component {
 
   render() {
     var { id } = this.state;
-    console.log(this.props.isDisplayForm);
     
     if(!this.props.isDisplayForm) return '';
     return (
@@ -162,7 +161,7 @@ const mapDispatchToProps = (dispatch, props) => {
       dispatch(actions.closeForm());
     },
     onUpdateItem: (item) => {
-      dispatch(actions.updateItem(item));
+      dispatch(actions.updateItemRequest(item));
     }
   }
 }

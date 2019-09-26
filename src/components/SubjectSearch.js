@@ -49,7 +49,7 @@ class Search extends Component {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     onSearch : (keyword) => {
-      dispatch(actions.search(keyword))
+      dispatch(actions.searchRequest(keyword))
     }
   }
 }

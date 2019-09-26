@@ -26,7 +26,7 @@ class SubjectItem extends Component {
   };
 
   selectedItem = () => {
-    this.props.onGetUpdating(this.props.item);
+    this.props.setUpdatingObjectRequest(this.props.item);
     this.props.onOpenForm();
   };
 
@@ -71,10 +71,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     onDeleteItem: item => {
-      dispatch(actions.deleteItem(item));
+      dispatch(actions.deleteItemRequest(item));
     },
-    onGetUpdating: item => {
-      dispatch(actions.getUpdating(item));
+    setUpdatingObjectRequest: item => {
+      dispatch(actions.setUpdatingObjectRequest(item));
     },
     onOpenForm: () => {
       dispatch(actions.openForm());

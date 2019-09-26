@@ -44,25 +44,34 @@ var items = (state = initialState, action) => {
       // let newState = state.items.push(newItem);
       state.items = [...state.items, newItem];
       saveLocal(state.items);
-      return {...state} ;
+      return { ...state };
     }
     case types.ADD_ITEM_ERROR: {
       return {};
     }
 
     // delete item
-    case types.DELETE_ITEM: {
-      let newItems = [...state.items];
-      let index = newItems.indexOf(action.item);
+    case types.DELETE_ITEM_REQUEST: {
+      return {...state}
+    }
+    case types.DELETE_ITEM_SUCCESS: {
+      let items = [...state.items];
+      let index = items.indexOf(action.item);
 
-      newItems.splice(index, 1);
-      saveLocal(newItems);
-      state = { ...state, items: newItems };
+      items.splice(index, 1);
+      saveLocal(items);
+      state = { ...state, items};
       return state;
+    }
+    case types.DELETE_ITEM_ERROR: {
+      return {};
     }
 
     //update item
-    case types.UPDATE_ITEM: {
+    case types.UPDATE_ITEM_REQUEST:{
+      return {...state}
+    }
+    case types.UPDATE_ITEM_SUCCESS: {
       let newItems = [...state.items];
       let index = newItems.findIndex(item => {
         return item.id === action.item.id;
@@ -72,36 +81,58 @@ var items = (state = initialState, action) => {
       state = { ...state, items: newItems };
       return state;
     }
+    case types.UPDATE_ITEM_ERROR: {
+      return {};
+    }
 
     // display form
     case types.TOGGLE_FORM: {
-      state = {...state, isDisplayForm: !state.isDisplayForm}
+      state = { ...state, isDisplayForm: !state.isDisplayForm };
       return state;
     }
     case types.OPEN_FORM: {
-      state = {...state, isDisplayForm: true}
+      state = { ...state, isDisplayForm: true };
       return state;
     }
     case types.CLOSE_FORM: {
-      state = {...state, isDisplayForm: false}
+      state = { ...state, isDisplayForm: false };
       return state;
     }
 
     // Get value for updated item
-    case types.GET_UPDATING: {
-      state = {...state, itemUpdating: action.item}
+    case types.SET_UPDATING_OBJECT_REQUEST: {
+      return {...state}
+    }
+    case types.SET_UPDATING_OBJECT_SUCCESS: {
+      state = { ...state, itemUpdating: action.item };
       return state;
+    }
+    case types.SET_UPDATING_OBJECT_ERROR: {
+      return {};
     }
 
     //search
-    case types.SEARCH: {
-      state = {...state, keyword: action.keyword};
+    case types.SEARCH_REQUEST: {
+      state = {...state};
       return state;
     }
-    //sort
-    case types.SORT: {  
-      state = {...state, sortBy: action.sortBy};
+    case types.SEARCH_SUCCESS: {
+      state = { ...state, keyword: action.keyword };
       return state;
+    }
+    case types.SEARCH_ERROR: {
+      return {};
+    }
+    //sort
+    case types.SORT_REQUEST: {
+      return state;
+    }
+    case types.SORT_SUCCESS: {
+      state = { ...state, sortBy: action.sortBy };
+      return state;
+    }
+    case types.SORT_ERROR: {
+      return {};
     }
 
     default:
