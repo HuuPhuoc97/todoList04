@@ -3,19 +3,20 @@ import {
   put,
   takeLatest,
   // delay,
-  // call,
-  // cancelled,
-  // take,
-  // cancel
 } from "redux-saga/effects";
 import * as types from "./../constants/ActionTypes";
+import { api } from "./api";
 //   import * as actions from './../actions/index';
 //   import _ from "lodash";
 
 // func get list
-const data = JSON.parse(localStorage.getItem("items"))?JSON.parse(localStorage.getItem("items")):[];
+// const data = JSON.parse(localStorage.getItem("items"))?JSON.parse(localStorage.getItem("items")):[];
 function* getTodoList() {
   try {
+    const response = yield api.fetchListItem();
+
+
+    const data = response.data;
     const items = data ? data : [];
     yield put({
       type: types.LIST_ITEM_SUCCESS,
@@ -33,9 +34,11 @@ function* getTodoList() {
 // add item
 function* addItem(action) {
   try {
+    let {item} = action;
+    const response = yield (api.addNewItemAPI(item));
     yield put({
       type: types.ADD_ITEM_SUCCESS,
-      item: action.item
+      item: response.data
     });
   } catch (error) {
     yield put({
@@ -47,10 +50,12 @@ function* addItem(action) {
 
 // delete item
 function* deleteItem(action) {
+
   try {
+    const response = yield (api.deleteItemAPI(action.item));
     yield put({
       type: types.DELETE_ITEM_SUCCESS,
-      item: action.item
+      item: response.data
     })
   } catch (error) {
     yield put({
@@ -63,9 +68,11 @@ function* deleteItem(action) {
 // update item
 function* updateItem(action) {
   try {
+    const response = yield (api.updateItemAPI(action.item));
+
     yield put({
       type: types.UPDATE_ITEM_SUCCESS,
-      item: action.item
+      item: response.data
     })
   } catch (error) {
     yield put({

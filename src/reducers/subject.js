@@ -1,11 +1,11 @@
 import * as types from "../constants/ActionTypes";
 
 // use library randomstring to create random strings, then assign random string to id
-var generateID = () => {
-  var randomstring = require("randomstring");
-  var id = randomstring.generate();
-  return id;
-};
+// var generateID = () => {
+//   var randomstring = require("randomstring");
+//   var id = randomstring.generate();
+//   return id;
+// };
 
 var saveLocal = array => {
   localStorage.setItem("items", JSON.stringify(array));
@@ -36,14 +36,14 @@ var items = (state = initialState, action) => {
       return { ...state };
     }
     case types.ADD_ITEM_SUCCESS: {
-      let newItem = {
-        id: generateID(),
-        name: action.item.name,
-        level: action.item.level
-      };
+      // let newItem = {
+      //   id: generateID(),
+      //   name: action.item.name,
+      //   level: action.item.level
+      // };
       // let newState = state.items.push(newItem);
-      state.items = [...state.items, newItem];
-      saveLocal(state.items);
+      state.items = [...state.items, action.item];
+      // saveLocal(state.items);
       return { ...state };
     }
     case types.ADD_ITEM_ERROR: {
@@ -78,8 +78,7 @@ var items = (state = initialState, action) => {
       });
       newItems[index] = action.item;
       saveLocal(newItems);
-      state = { ...state, items: newItems };
-      return state;
+      return { ...state, items: newItems };
     }
     case types.UPDATE_ITEM_ERROR: {
       return {};

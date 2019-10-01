@@ -38,7 +38,7 @@ class SubjectList extends Component {
         <div className="panel-body">
           <table className="table table-bordered">
             <thead>
-              <tr>
+              <tr className="active">
                 <th className="col-lg-1">#</th>
                 <th className="col-lg-7">Name</th>
                 <th className="col-lg-2">Level</th>

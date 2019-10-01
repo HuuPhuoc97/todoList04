@@ -3,49 +3,34 @@ import { connect } from "react-redux";
 import * as actions from "./../actions/index";
 
 class SubjectItem extends Component {
-  // properties lable of <span>
-  takeLable = () => {
-    var { item } = this.props;
-    if (item.level === -1) {
-      return "label label-default";
-    } else if (item.level === 0) {
-      return "label label-info";
-    } else {
-      return "label label-success";
-    }
-  };
-  takeLevelName = () => {
-    var { item } = this.props;
-    if (item.level === -1) {
-      return "Small";
-    } else if (item.level === 0) {
-      return "Medium";
-    } else {
-      return "Hight";
-    }
-  };
-
-  selectedItem = () => {
+  selectedItemEdit = () => {
     this.props.setUpdatingObjectRequest(this.props.item);
     this.props.onOpenForm();
   };
 
   render() {
     var { item, index } = this.props;
+    var elementLevel = () => {
+      if (item.level === -1) {
+        return <span className="label label-default fontLevelName">Small</span>;
+      } else if (item.level === 0) {
+        return <span className="label label-info fontLevelName">Medium</span>;
+      } else {
+        return <span className="label label-success fontLevelName">Hight</span>;
+      }
+    };
     return (
       <tr>
         <th className="col-lg-1">{index + 1}</th>
         <td className="col-lg-7">{item.name}</td>
         <td className="col-lg-2">
-          <span className={this.takeLable() + " fontLevelName"}>
-            {this.takeLevelName()}
-          </span>
+          {elementLevel()}
         </td>
         <td className="col-lg-2">
           <button
             type="button"
             className="btn btn-warning"
-            onClick={this.selectedItem}
+            onClick={this.selectedItemEdit}
           >
             Edit
           </button>
