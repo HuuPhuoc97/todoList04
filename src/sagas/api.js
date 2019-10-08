@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const url = "http://5d8db435370f02001405c26a.mockapi.io/api/items";
+// const url = "http://5d8db435370f02001405c26a.mockapi.io/api/items";
+const url = "http://localhost:4000/items";
 function fetchListItem() {
   return axios({
     method: "GET",
@@ -21,7 +22,7 @@ function addNewItemAPI(newItem) {
 function deleteItemAPI(item){
   return axios({
     method: "DELETE",
-    url: `${url}/${item.id}`,
+    url: `${url}/${item._id}`,
     data: null
   })
 }
@@ -30,15 +31,15 @@ function deleteItemAPI(item){
 function updateItemAPI(item){
   return axios({
     method: "PUT",
-    url: `${url}/${item.id}`,
+    url: `${url}/${item._id}`,
     data: item
   })
 }
 
-function getItemAPI(id){
+function getItemAPI(_id){
   return axios({
     method: "GET",
-    url: `${url}/${id}`,
+    url: `${url}/${_id}`,
   })
 }
 

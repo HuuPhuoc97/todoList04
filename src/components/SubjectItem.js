@@ -8,6 +8,10 @@ class SubjectItem extends Component {
     this.props.onOpenForm();
   };
 
+  onDeleteItem = () => {
+    this.props.onDeleteItem(this.props.item);
+  }
+
   render() {
     var { item, index } = this.props;
     var elementLevel = () => {
@@ -38,9 +42,7 @@ class SubjectItem extends Component {
           <button
             type="button"
             className="btn btn-danger"
-            onClick={() => {
-              this.props.onDeleteItem(item);
-            }}
+            onClick={this.onDeleteItem}
           >
             Delete
           </button>

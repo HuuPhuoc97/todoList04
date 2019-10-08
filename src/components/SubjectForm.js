@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import * as actions from "./../actions/index";
 
 class SubjectForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: "",
+      _id: "",
       name: "",
       level: 0
     };
@@ -19,7 +19,7 @@ class SubjectForm extends Component {
     var { itemUpdating } = this.props;
     if (itemUpdating) {
       this.setState({
-        id: itemUpdating.id,
+        _id: itemUpdating._id,
         name: itemUpdating.name,
         level: itemUpdating.level
       });
@@ -29,7 +29,7 @@ class SubjectForm extends Component {
     var { itemUpdating } = nextProps;
     if (itemUpdating) {
       this.setState({
-        id: itemUpdating.id,
+        _id: itemUpdating._id,
         name: itemUpdating.name,
         level: itemUpdating.level
       });
@@ -40,11 +40,10 @@ class SubjectForm extends Component {
 
   onSubmit = fields => {
     fields.level = parseInt(fields.level);
-    
-    
-    if(fields.id === ''){
-      this.props.addItemRequest(fields); }
-    else{ 
+
+    if (fields._id === "") {
+      this.props.addItemRequest(fields);
+    } else {
       this.props.onUpdateItem(fields);
     }
     this.props.onCloseForm();
@@ -53,26 +52,26 @@ class SubjectForm extends Component {
   // Reset state to default
   onResetForm = () => {
     this.setState({
-      id: "",
+      _id: "",
       name: "",
       level: 0
     });
   };
 
   render() {
-    var { id } = this.state;
-    
-    if(!this.props.isDisplayForm) return '';
+    var { _id } = this.state;
+
+    if (!this.props.isDisplayForm) return "";
     return (
       <div>
         <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
           <div
-            className={id === "" ? "panel panel-info" : "panel panel-warning"}
+            className={_id === "" ? "panel panel-info" : "panel panel-warning"}
           >
             <div className="panel-heading">
               <h3 className="panel-title">
-                {id === "" ? "Add Item" : "Edit Item"}
+                {_id === "" ? "Add Item" : "Edit Item"}
                 <i
                   className="fa fa-times iconCloseAddItem"
                   aria-hidden="true"
@@ -86,11 +85,11 @@ class SubjectForm extends Component {
                 initialValues={this.state}
                 validationSchema={Yup.object().shape({
                   name: Yup.string()
-                    .required(" Name is required") 
+                    .required(" Name is required")
                     .min(4, "Name must be at least 4 characters")
                 })}
                 onSubmit={this.onSubmit}
-                render={({  errors, touched  }) => (
+                render={({ errors, touched }) => (
                   <Form>
                     {touched.name && errors.name ? (
                       <div className="alert alert-danger">
@@ -100,13 +99,8 @@ class SubjectForm extends Component {
                       ""
                     )}
                     <div className="form-group">
-                    
                       <label>Name: </label>
-                      <Field
-                        type="text"
-                        className="form-control"
-                        name="name"
-                      />
+                      <Field type="text" className="form-control" name="name" />
                     </div>
 
                     <label>Level: </label>
@@ -146,23 +140,26 @@ class SubjectForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     isDisplayForm: state.subject.isDisplayForm,
     itemUpdating: state.subject.itemUpdating
-  }
-}
+  };
+};
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    addItemRequest: (item) => {
+    addItemRequest: item => {
       dispatch(actions.addItemRequest(item));
     },
     onCloseForm: () => {
       dispatch(actions.closeForm());
     },
-    onUpdateItem: (item) => {
+    onUpdateItem: item => {
       dispatch(actions.updateItemRequest(item));
     }
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(SubjectForm);
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SubjectForm);

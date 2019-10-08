@@ -7,9 +7,9 @@ import * as types from "../constants/ActionTypes";
 //   return id;
 // };
 
-var saveLocal = array => {
-  localStorage.setItem("items", JSON.stringify(array));
-};
+// var saveLocal = array => {
+//   localStorage.setItem("items", JSON.stringify(array));
+// };
 
 var initialState = {
   items: [],
@@ -52,15 +52,14 @@ var items = (state = initialState, action) => {
 
     // delete item
     case types.DELETE_ITEM_REQUEST: {
-      return {...state}
+      return { ...state };
     }
     case types.DELETE_ITEM_SUCCESS: {
       let items = [...state.items];
       let index = items.indexOf(action.item);
 
       items.splice(index, 1);
-      saveLocal(items);
-      state = { ...state, items};
+      state = { ...state, items };
       return state;
     }
     case types.DELETE_ITEM_ERROR: {
@@ -68,16 +67,15 @@ var items = (state = initialState, action) => {
     }
 
     //update item
-    case types.UPDATE_ITEM_REQUEST:{
-      return {...state}
+    case types.UPDATE_ITEM_REQUEST: {
+      return { ...state };
     }
     case types.UPDATE_ITEM_SUCCESS: {
       let newItems = [...state.items];
       let index = newItems.findIndex(item => {
-        return item.id === action.item.id;
+        return item._id === action.item._id;
       });
       newItems[index] = action.item;
-      saveLocal(newItems);
       return { ...state, items: newItems };
     }
     case types.UPDATE_ITEM_ERROR: {
@@ -100,7 +98,7 @@ var items = (state = initialState, action) => {
 
     // Get value for updated item
     case types.SET_UPDATING_OBJECT_REQUEST: {
-      return {...state}
+      return { ...state };
     }
     case types.SET_UPDATING_OBJECT_SUCCESS: {
       state = { ...state, itemUpdating: action.item };
@@ -112,7 +110,7 @@ var items = (state = initialState, action) => {
 
     //search
     case types.SEARCH_REQUEST: {
-      state = {...state};
+      state = { ...state };
       return state;
     }
     case types.SEARCH_SUCCESS: {
